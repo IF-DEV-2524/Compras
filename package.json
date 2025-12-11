@@ -1,0 +1,34 @@
+{
+  "name": "compras",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Simular seleção, adição a carrinho, validador de cartão e efetivação de compras",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IF-DEV-2524/Compras.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IF-DEV-2524/Compras/issues"
+  },
+  "homepage": "https://github.com/IF-DEV-2524/Compras#readme",
+  "dependencies": {
+    "@prisma/adapter-mssql": "^7.1.0",
+    "@prisma/client": "6.19",
+    "decimal.js": "^10.6.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/mssql": "^9.1.8",
+    "@types/node": "^24.10.1",
+    "prisma": "6.19"
+  }
+}

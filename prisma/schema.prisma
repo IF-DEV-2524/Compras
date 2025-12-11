@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+// Produtos disponíveis na loja
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  nm_product  String
+  description String?
+  gross_amount String
+  fee_amount   String
+  shipping     String
+}
+
+// Sacolas de compras
+model Bag {
+  id                 String      @id @default(auto()) @map("_id") @db.ObjectId
+
+  total_gross_amount String       @default("0")
+
+  total_net_amount String       @default("0")
+
+  // Itens embutidos diretamente na bag
+  items               Json
+
+  // Venda relacionada (uma bag só pode ter uma venda)
+  sale               Sale?
+}
+
+// Tipo embutido para os itens da sacola
+type ProductItem {
+  product_id  String  @db.ObjectId
+  quantity    Int    @default(1)
+  gross_amount String
+  net_amount String
+  fee_amount String
+  shipping String
+}
+
+// Venda final
+model Sale {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  bag_id             String    @unique @db.ObjectId
+  total_gross_amount String
+  total_net_amount   String
+  created_at         DateTime  @default(now())
+
+  bag                Bag       @relation(fields: [bag_id], references: [id])
+}
+
